@@ -161,7 +161,7 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
 @media(max-width:800px){.ch-row{grid-template-columns:1fr}}
 .ch-title{font-size:14px;font-weight:600;margin-bottom:3px;color:var(--t1)}
 .ch-sub{font-size:12px;color:var(--t3);margin-bottom:12px;font-weight:400}
-.ch-area{height:220px;position:relative;overflow:hidden}
+.ch-area{height:260px;position:relative;overflow:visible}
 .chart-line{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .chart-fill{opacity:.08}
 .axis-l{font-size:10px;fill:var(--t3);font-family:'DM Sans',system-ui,sans-serif}
@@ -428,7 +428,7 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
     <span class="hdr-divider"></span>
     <div>
       <div class="hdr-title">Customer pulse</div>
-      <div class="hdr-sub">Feedback Intelligence Dashboard</div>
+      <div class="hdr-sub" id="hdrSub">Real-time review monitoring &amp; sentiment analysis</div>
     </div>
   </div>
   <div class="hdr-ctrls" style="display:flex;flex-direction:row;align-items:center;gap:10px">
@@ -442,8 +442,8 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
 </div>
 <nav class="nav" id="nav">
   <button class="active" data-sec="overview">Overview</button>
-  <button data-sec="competitors">Competitor comparison</button>
   <button data-sec="geo">Geographic insights</button>
+  <button data-sec="competitors">Competitor comparison</button>
   <button data-sec="painpoints">Issue analysis</button>
 
 </nav>
@@ -474,11 +474,11 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
 
 <div class="sec active" id="sec-overview">
   <div id="scorecard-row" class="sc-row"></div>
-  <div class="insight" id="insight-banner"></div>
 
   <div class="stitle">Category breakdown</div>
   <div class="expl" style="margin:-4px 0 14px;max-width:800px">Each bar shows a category-specific sentiment score (0–100), computed by filtering reviews matching that category's keyword dictionary. Higher = more positive feedback.</div>
   <div class="cat-grid" id="cat-grid"></div>
+  <div class="insight" id="insight-banner"></div>
 
   <div class="ch-row" id="overview-charts"></div>
 </div>
@@ -970,8 +970,8 @@ function renderOverview(){
   document.getElementById('cat-grid').innerHTML=catHTML;
 
   document.getElementById('overview-charts').innerHTML=`
-    <div class="card"><div class="ch-title">Sentiment trend</div><div class="ch-sub">Monthly average sentiment over time</div><div class="ch-area" id="ch-trend"></div></div>
-    <div class="card"><div class="ch-title">Monthly review volume</div><div class="ch-sub">Number of reviews collected per month</div><div class="ch-area" id="ch-volume"></div></div>`;
+    <div class="card" style="display:flex;flex-direction:column"><div class="ch-title">Sentiment trend</div><div class="ch-sub">Monthly average sentiment over time</div><div class="ch-area" id="ch-trend" style="flex:1;display:flex;align-items:center"></div></div>
+    <div class="card" style="display:flex;flex-direction:column"><div class="ch-title">Monthly review volume</div><div class="ch-sub">Number of reviews collected per month</div><div class="ch-area" id="ch-volume" style="flex:1;display:flex;align-items:center"></div></div>`;
   renderTrendChart('ch-trend',revs);
   renderVolumeChart('ch-volume',revs);
 
@@ -1041,7 +1041,7 @@ function renderSourceBars(id,revs){
    ═══════════════════════════════════════════════ */
 function renderTrendChart(id,revs){
   const el=document.getElementById(id);if(!el)return;
-  const W=440,H=200,PL=40,PR=10,PT=10,PB=30;
+  const W=500,H=240,PL=40,PR=16,PT=16,PB=30;
   const months=[];const now=new Date();
   for(let i=11;i>=0;i--){const d=new Date(now);d.setMonth(d.getMonth()-i);months.push({m:d.getMonth(),y:d.getFullYear(),label:d.toLocaleString('en',{month:'short'})});}
   const scores=months.map(mo=>{
@@ -1078,7 +1078,7 @@ function renderTrendChart(id,revs){
    ═══════════════════════════════════════════════ */
 function renderVolumeChart(id,revs){
   const el=document.getElementById(id);if(!el)return;
-  const W=440,H=220,PL=40,PR=10,PT=24,PB=30;
+  const W=500,H=240,PL=40,PR=16,PT=28,PB=30;
   const months=[];const now=new Date();
   for(let i=11;i>=0;i--){const d=new Date(now);d.setMonth(d.getMonth()-i);months.push({m:d.getMonth(),y:d.getFullYear(),label:d.toLocaleString('en',{month:'short'})});}
   const counts=months.map(mo=>revs.filter(r=>new Date(r.date).getMonth()===mo.m&&new Date(r.date).getFullYear()===mo.y).length);
@@ -1344,8 +1344,10 @@ async function pullLiveReviews(providerKey){
   allResults.push(...fccPosts);
 
   const scored = processReviews(allResults);
+  let freshCount = 0;
   if(providerKey === 'brightspeed'){
     const fresh = mergeReviews(ST.reviews, scored);
+    freshCount = fresh.length;
     ST.reviews = [...ST.reviews, ...fresh];
     saveLiveCache('brightspeed', fresh);
     updateDataMode();
@@ -1354,6 +1356,7 @@ async function pullLiveReviews(providerKey){
 
   if(btn) btn.disabled = false;
   if(prog) prog.classList.remove('active');
+
   return scored;
 }
 
