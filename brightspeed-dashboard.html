@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brightspeed Customer Pulse</title>
+<title>Brightspeed customer pulse</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet">
@@ -100,8 +100,7 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
 .sc-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:24px}
 @media(max-width:800px){.sc-row{grid-template-columns:1fr 1fr} .sc-row .card:nth-child(3){grid-column:span 2}}
 @media(max-width:500px){.sc-row{grid-template-columns:1fr}}
-.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--brand);border-radius:3px 3px 0 0}
-.sc-big{font-size:56px;font-weight:800;line-height:1;margin-bottom:4px;color:var(--brand);letter-spacing:-2px}
+.sc-big{font-size:72px;font-weight:800;line-height:1;margin-bottom:4px;color:var(--brand);letter-spacing:-2px}
 .sc-lbl{font-size:13px;color:var(--t3);margin-bottom:12px;font-weight:400}
 .sc-meta{display:flex;gap:20px;flex-wrap:wrap}
 .mi{display:flex;flex-direction:column;gap:2px}
@@ -171,7 +170,7 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
 /* ── Sentiment distribution ── */
 .sent-dist{display:flex;gap:16px;margin-top:10px;justify-content:center}
 .sent-stat{text-align:center}
-.sent-pct{font-size:24px;font-weight:800;letter-spacing:-.5px}
+.sent-pct{font-size:28px;font-weight:800;letter-spacing:-.5px}
 .sent-name{font-size:10px;color:var(--t3);text-transform:uppercase;font-weight:500;letter-spacing:.8px;margin-top:2px}
 
 /* ── Footer ── */
@@ -331,33 +330,6 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
 .cmp-table th.col-hl{background:rgba(255,92,53,.08);color:var(--brand)}
 .cmp-cell{font-weight:700;font-size:13px;border-radius:4px;padding:2px 6px;display:inline-block;min-width:32px}
 
-/* ── Pricing Impact ── */
-.pri-headline{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
-.pri-kpi{
-  background:var(--card);border-radius:var(--r);padding:20px 24px;
-  border:1px solid var(--bdr);box-shadow:var(--sh);text-align:center;
-}
-.pri-kpi-val{font-size:32px;font-weight:800;letter-spacing:-.5px;line-height:1.1}
-.pri-kpi-lbl{font-size:12px;color:var(--t3);margin-top:6px;font-weight:500}
-.pri-kpi-sub{font-size:11px;color:var(--t3);margin-top:4px;font-style:italic}
-.pri-charts{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:stretch}
-@media(max-width:900px){.pri-charts{grid-template-columns:1fr}}
-.pri-card{
-  background:var(--card);border-radius:var(--r);padding:20px 24px;
-  border:1px solid var(--bdr);box-shadow:var(--sh);
-}
-.pri-card-title{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.pri-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.pri-bar-lbl{font-size:11px;font-weight:600;color:var(--t2);min-width:120px;text-align:right}
-.pri-bar-track{flex:1;height:18px;background:var(--bdr-subtle);border-radius:4px;overflow:hidden;position:relative}
-.pri-bar-fill{height:100%;border-radius:4px;transition:width .4s ease}
-.pri-bar-val{font-size:11px;font-weight:700;min-width:36px;text-align:left}
-.pri-insight{
-  background:var(--brand-light);border:1px solid #FECBBA;border-radius:var(--r);
-  padding:16px 20px;margin-bottom:24px;font-size:13px;line-height:1.6;color:#78350F;
-}
-.pri-insight strong{font-weight:700;color:#92400E}
-
 /* ── Geographic Insights ── */
 .geo-layout{display:grid;grid-template-columns:1fr 260px;gap:20px;margin-bottom:24px}
 @media(max-width:1100px){.geo-layout{grid-template-columns:1fr 240px}}
@@ -455,48 +427,30 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
     <img class="bs-logo" src="https://www.brightspeed.com/content/dam/brightspeed/images/icons/Brightspeed_Logo_Full_Color_RGB_864px@72ppi.png" alt="Brightspeed">
     <span class="hdr-divider"></span>
     <div>
-      <div class="hdr-title">Customer Pulse</div>
+      <div class="hdr-title">Customer pulse</div>
       <div class="hdr-sub">Feedback Intelligence Dashboard</div>
     </div>
   </div>
-  <div class="hdr-ctrls">
+  <div class="hdr-ctrls" style="display:flex;flex-direction:row;align-items:center;gap:10px">
+    <span class="pull-progress" id="pullProgress" style="font-size:11px;color:#fff"><span class="spinner"></span><span id="pullStatus">Fetching…</span></span>
     <span class="badge badge-g"><span class="badge-dot"></span><span id="data-age-text">Embedded baseline</span></span>
+    <button class="pull-btn" id="btnPull" onclick="currentSection==='competitors'?pullAllProviders():pullLiveReviews('brightspeed')" style="font-size:11px;padding:6px 14px">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 12a9 9 0 11-3.5-7.1"/><polyline points="21 3 21 9 15 9"/></svg>
+      Pull live reviews
+    </button>
   </div>
 </div>
 <nav class="nav" id="nav">
   <button class="active" data-sec="overview">Overview</button>
-  <button data-sec="painpoints">Issue Analysis</button>
-  <button data-sec="competitors">Competitor Comparison</button>
-  <button data-sec="geo">Geographic Insights</button>
-  <button data-sec="pricing">Pricing Impact</button>
+  <button data-sec="competitors">Competitor comparison</button>
+  <button data-sec="geo">Geographic insights</button>
+  <button data-sec="painpoints">Issue analysis</button>
+
 </nav>
 </header>
 
 <main class="main">
 
-<div class="dm-banner" id="dmBanner">
-  <div class="dm-left">
-    <div class="dm-icon">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    </div>
-    <div>
-      <div class="dm-title">Data Mode: <span class="dm-mode dm-mode-embed" id="dmModeLabel">Embedded Baseline</span></div>
-      <div class="dm-desc" id="dmDesc">Dashboard is running with embedded baseline reviews. Click "Pull Live Reviews" to fetch real-time data from Reddit and FCC for richer, up-to-date analysis.</div>
-    </div>
-  </div>
-  <div class="dm-right">
-    <span class="pull-progress" id="pullProgress"><span class="spinner"></span><span id="pullStatus">Fetching…</span></span>
-    <button class="pull-btn" id="btnPull" onclick="currentSection==='competitors'?pullAllProviders():pullLiveReviews('brightspeed')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 12a9 9 0 11-3.5-7.1"/><polyline points="21 3 21 9 15 9"/></svg>
-      Pull Live Reviews
-    </button>
-    <div class="dm-stats" id="dmStats">
-      <div class="dm-stat"><span class="dm-stat-dot" style="background:var(--accent)"></span>Embedded: <strong id="dmEmbed">0</strong></div>
-      <div class="dm-stat"><span class="dm-stat-dot" style="background:var(--brand)"></span>Live: <strong id="dmLive">0</strong></div>
-      <div class="dm-stat"><span class="dm-stat-dot" style="background:#fff"></span>Total: <strong id="dmTotal">0</strong></div>
-    </div>
-  </div>
-</div>
 
 <div class="fbar">
   <div class="tpills" id="tpills">
@@ -513,6 +467,7 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
       <option value="fcc">FCC</option>
       <option value="bbb">BBB</option>
       <option value="trustpilot">Trustpilot</option>
+      <option value="pissedconsumer">PissedConsumer</option>
     </select>
   </div>
 </div>
@@ -521,7 +476,7 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
   <div id="scorecard-row" class="sc-row"></div>
   <div class="insight" id="insight-banner"></div>
 
-  <div class="stitle">Category Breakdown</div>
+  <div class="stitle">Category breakdown</div>
   <div class="expl" style="margin:-4px 0 14px;max-width:800px">Each bar shows a category-specific sentiment score (0–100), computed by filtering reviews matching that category's keyword dictionary. Higher = more positive feedback.</div>
   <div class="cat-grid" id="cat-grid"></div>
 
@@ -531,16 +486,16 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
 <div class="sec" id="sec-painpoints">
   <div class="insight" id="pp-summary" style="margin-bottom:20px"></div>
 
-  <div class="stitle">Worst-Rated Reviews <span style="font-size:11px;color:var(--t3);font-weight:400">— Lowest sentiment scores across all sources</span></div>
+  <div class="stitle">Worst-rated reviews <span style="font-size:11px;color:var(--t3);font-weight:400">— Lowest sentiment scores across all sources</span></div>
   <div id="worst-reviews"></div>
 </div>
 
 <div class="sec" id="sec-competitors">
-  <div class="stitle">Provider Scorecard</div>
-  <div class="expl" style="margin:-4px 0 14px;max-width:800px">Overall sentiment scores ranked across all providers. Click "Pull Live Reviews" to fetch the latest public feedback for all providers.</div>
+  <div class="stitle">Provider scorecard</div>
+  <div class="expl" style="margin:-4px 0 14px;max-width:800px">Overall sentiment scores ranked across all providers. Click "Pull live reviews" to fetch the latest public feedback for all providers.</div>
   <div class="cmp-row" id="cmp-scorecards"></div>
 
-  <div class="stitle" style="margin-top:4px">Category Ranking Grid</div>
+  <div class="stitle" style="margin-top:4px">Category ranking grid</div>
   <div class="expl" style="margin:-4px 0 14px;max-width:800px">Side-by-side sentiment scores per category. Brightspeed column highlighted.</div>
   <div id="cmp-ranking"></div>
 
@@ -556,7 +511,7 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
     <div class="geo-map-card">
       <div class="geo-map-hdr">
         <div>
-          <div class="geo-map-title">Sentiment by State</div>
+          <div class="geo-map-title">Sentiment by state</div>
           <div class="geo-map-sub">Brightspeed footprint states · Colored by average sentiment score</div>
         </div>
       </div>
@@ -565,11 +520,11 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
 
     <div class="geo-panel">
       <div class="geo-panel-card">
-        <div class="geo-panel-title"><span style="color:var(--pos)">▲</span> Best Sentiment</div>
+        <div class="geo-panel-title"><span style="color:var(--pos)">▲</span> Best sentiment</div>
         <div class="geo-rank" id="geoBest"></div>
       </div>
       <div class="geo-panel-card">
-        <div class="geo-panel-title"><span style="color:var(--neg)">▼</span> Worst Sentiment</div>
+        <div class="geo-panel-title"><span style="color:var(--neg)">▼</span> Worst sentiment</div>
         <div class="geo-rank" id="geoWorst"></div>
       </div>
     </div>
@@ -578,28 +533,12 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--b
   <div class="geo-detail" id="geoDetail"></div>
 </div>
 
-<div class="sec" id="sec-pricing">
-  <div class="pri-insight" id="priInsight"></div>
-
-  <div class="pri-headline" id="priKpis"></div>
-
-  <div class="pri-charts">
-    <div class="pri-card" style="display:flex;flex-direction:column">
-      <div class="pri-card-title">📊 Top Pricing Sub-Issues</div>
-      <div id="priBarChart" style="flex:1;display:flex;flex-direction:column;justify-content:center"></div>
-    </div>
-    <div class="pri-card" style="display:flex;flex-direction:column">
-      <div class="pri-card-title">📈 Pricing Mention Trend Over Time</div>
-      <div id="priTrendChart" style="flex:1;display:flex;flex-direction:column;justify-content:center"></div>
-    </div>
-  </div>
-</div>
 
 </main>
 
 <footer class="footer">
-  Brightspeed Customer Pulse &mdash; All data sourced from publicly available reviews<br>
-  Reddit &middot; FCC &middot; BBB &middot; Trustpilot
+  Brightspeed customer pulse &mdash; All data sourced from publicly available reviews<br>
+  Reddit &middot; FCC &middot; BBB &middot; Trustpilot &middot; PissedConsumer
 </footer>
 
 <script>
@@ -613,12 +552,12 @@ Object.assign(AFINN,{"outage":-3,"throttle":-2,"throttling":-2,"buffering":-2,"d
    CATEGORY KEYWORD DICTIONARIES
    ═══════════════════════════════════════════════ */
 const CATS={
-  network:{name:"Network Performance",icon:"📡",kw:["speed","slow","fast","outage","down","disconnect","buffering","latency","ping","bandwidth","throttle","throttling","congestion","reliable","unreliable","uptime","downtime","packet","jitter","fiber","cable","modem","router","wifi","wi-fi","signal","mbps","gbps","download","upload","streaming","gaming","lag","laggy","glitch","intermittent","dropout","dropouts","connection","connected","offline","online","reboot","restart","dsl"]},
-  pricing:{name:"Pricing & Value",icon:"💰",kw:["price","cost","expensive","cheap","affordable","rate","increase","hike","fee","hidden","promotional","promo","deal","contract","value","worth","overpriced","competitive","bundle","discount","saving","savings","money","dollar","monthly","annually","plan","tier","package","pay","payment","budget"]},
-  billing:{name:"Billing & Accounts",icon:"🧾",kw:["bill","billing","charge","overcharge","overcharged","credit","refund","payment","autopay","auto-pay","invoice","statement","dispute","error","incorrect","double","late","cancellation","cancel","account","manage","login","password","portal","app","paperless","balance"]},
-  service:{name:"Customer Service",icon:"🎧",kw:["support","help","agent","representative","rep","call center","hold","wait","waiting","transfer","transferred","escalate","manager","supervisor","rude","helpful","knowledgeable","chat","phone","email","callback","resolution","resolve","resolved","response","respond","courteous","polite","impolite","unprofessional","professional","friendly","clueless","runaround","automated","robot","voicemail","queue"]},
-  technician:{name:"Technician & Install",icon:"🔧",kw:["technician","tech","install","installation","installer","repair","appointment","window","punctual","late","no-show","noshow","professional","equipment","setup","wiring","cable run","outside","inside","truck","on-time","schedule","scheduled","reschedule","dig","bury","buried","pole","box"]},
-  overall:{name:"Overall Experience",icon:"⭐",kw:["recommend","switch","switched","switching","cancel","cancelled","leave","leaving","stay","staying","satisfied","unsatisfied","happy","unhappy","frustrated","love","hate","worst","best","terrible","excellent","mediocre","decent","overall","general","experience","provider","isp","internet service","broadband"]}
+  network:{name:"Network performance",icon:"",kw:["speed","slow","fast","outage","down","disconnect","buffering","latency","ping","bandwidth","throttle","throttling","congestion","reliable","unreliable","uptime","downtime","packet","jitter","fiber","cable","modem","router","wifi","wi-fi","signal","mbps","gbps","download","upload","streaming","gaming","lag","laggy","glitch","intermittent","dropout","dropouts","connection","connected","offline","online","reboot","restart","dsl"]},
+  pricing:{name:"Pricing & value",icon:"",kw:["price","cost","expensive","cheap","affordable","rate","increase","hike","fee","hidden","promotional","promo","deal","contract","value","worth","overpriced","competitive","bundle","discount","saving","savings","money","dollar","monthly","annually","plan","tier","package","pay","payment","budget"]},
+  billing:{name:"Billing & accounts",icon:"",kw:["bill","billing","charge","overcharge","overcharged","credit","refund","payment","autopay","auto-pay","invoice","statement","dispute","error","incorrect","double","late","cancellation","cancel","account","manage","login","password","portal","app","paperless","balance"]},
+  service:{name:"Customer service",icon:"",kw:["support","help","agent","representative","rep","call center","hold","wait","waiting","transfer","transferred","escalate","manager","supervisor","rude","helpful","knowledgeable","chat","phone","email","callback","resolution","resolve","resolved","response","respond","courteous","polite","impolite","unprofessional","professional","friendly","clueless","runaround","automated","robot","voicemail","queue"]},
+  technician:{name:"Technician & install",icon:"",kw:["technician","tech","install","installation","installer","repair","appointment","window","punctual","late","no-show","noshow","professional","equipment","setup","wiring","cable run","outside","inside","truck","on-time","schedule","scheduled","reschedule","dig","bury","buried","pole","box"]},
+  overall:{name:"Overall experience",icon:"",kw:["recommend","switch","switched","switching","cancel","cancelled","leave","leaving","stay","staying","satisfied","unsatisfied","happy","unhappy","frustrated","love","hate","worst","best","terrible","excellent","mediocre","decent","overall","general","experience","provider","isp","internet service","broadband"]}
 };
 
 /* ═══════════════════════════════════════════════
@@ -822,6 +761,79 @@ a("Brightspeed fiber in the Charlotte metro area is competitive with anything Go
 a("My Brightspeed service goes out every single time there's a thunderstorm. The infrastructure in my area is decades old. They need to fix the plant.","reddit","2025-05-08",0,8);
 a("Just signed up for Brightspeed fiber 500mbps. Install was today and speeds are incredible. Coming from 15mbps DSL this is a whole new world.","reddit","2025-05-05",0,48);
 
+// ── Trustpilot reviews (real, from trustpilot.com/review/brightspeed.com) ──
+a("Technician was polite and was able to rectify issue.","trustpilot","2026-04-14",5,0);
+a("My service tech was fantastic and this is not in any way directed at him. My problem is with the scheduling of my visit. They gave me a window between 8am to 5pm. I explained I had an afternoon appt so the scheduler was supposed to note I needed a morning slot. My appt ended up happening around 3:30pm. I had to cancel my other appt because I was afraid to be charged the fee for not being available when my tech arrived. He ended up not even needing to come in my home. Can't you give a smaller window of appt time besides a customer needing to allot 8 hours for a call that may take 10 minutes. This is not the 1st time this has happened for me with Brightspeed.","trustpilot","2026-04-14",3,0);
+a("The technical expert was very polite and knowledgeable and help me to understand everything I'm very appreciative of his work and extremely satisfied","trustpilot","2026-04-14",5,0);
+a("Great communication explained everything well, was happy with our install and so far the internet is excellent","trustpilot","2026-04-14",5,0);
+a("The technician was professional, totally knowledgeable, and courteous.","trustpilot","2026-04-14",5,0);
+a("Brightspeed sent me an updated internet modem to replace my outdated old modem. I tried connecting it but could not do it correctly. I called customer support. They sent a service tech to my home. Kevin is a wonderful person, very nice and very knowledgeable about his job. He gave me a dsl/fone line splitter. It works perfect now. He arrived the NEXT DAY.","trustpilot","2026-04-12",5,0);
+a("The Techs were courteous and generous and installed the equipment exactly where I asked with no issues.","trustpilot","2026-04-14",5,0);
+a("Sam who sold me Brightspeed was wonderful. Answered all my questions. The installer was great, knew exactly what he was doing and did not take him long to install","trustpilot","2026-04-14",5,0);
+a("The automated chatbot was a little long to get to a real person and they really wanted me to redo all the steps on my own before they would write a ticket but once I got through everyone knows what they are doing. Tech came earlier than estimated. Was able to tell him over the phone the situation and they fixed it pretty quickly even though they had to replace the entire wire down to our house. He was very nice and polite and understanding the whole time","trustpilot","2026-04-14",4,0);
+a("Jan 18 a fiber line was buried in the crushed concrete driveway. Jan 21 a tech came to install and said line was too short on both ends. Our DSL was disconnected leaving us without internet for 2 months despite weekly calls to reschedule the new line drop. We were told that the DSL could not be reconnected, found out that was not true, called again and it was reconnected. Last week it was again disconnected, we called and were told it could not be reconnected. We told them we knew that was not true. It was reconnected the next day. A line was buried Mar 20. That crew did an awesome job. Today Mark connected the fiber internet and he did an awesome job.","trustpilot","2026-04-14",4,0);
+a("The tech was very friendly and knowledgeable. As far as the company customer service is horrible can't understand the people when you finally get someone on the line. It took me 3 days to get a hold of someone and when I explained to them what I wanted they couldn't understand. I called about call block and couldn't understand what was being said my plan was changed and the bill went from $65 to $188. I can't handle that increase.","trustpilot","2026-04-07",2,0);
+a("Fast, accurate and all personal are very helpful and polite.","trustpilot","2026-04-14",5,0);
+a("The techs were super quick and friendly. The agent I spoke with was very helpful and quick.","trustpilot","2026-04-14",5,0);
+a("Our technician was diligent and focused. He communicated effectively and provided additional resources for future needs and support.","trustpilot","2026-04-14",5,0);
+a("My technician this afternoon was Brittney. She called to let me know she was at the gate. She arrived promptly at 1:00 which was wonderful since our timeframe was 1 to 3. Brittney was very nice and had excellent customer service!","trustpilot","2026-04-14",5,0);
+a("I have been a customer for 20 years. I have had problems with getting service for 5 years now it been a constant back and forth. Making me stay at my house for days and they were never coming. After 3 weeks this time they said the problem the whole time was I needed an update to the box. Lost time at work can't work from home no internet. Then said they would overnight it to me and lied again. This company is the worst.","trustpilot","2026-04-14",1,0);
+a("The technician Adam was very polite and did an outstanding job with our brightspeed install. He took the time to answer all our questions and was very knowledgeable.","trustpilot","2026-04-14",5,0);
+a("Steven was friendly, informative and got the job done quickly.","trustpilot","2026-04-14",5,0);
+a("Knowledge of tech knowing his job and being very courteous and letting customer know what problem was","trustpilot","2026-04-14",5,0);
+a("Joe was great fixed the problem. He also came and checked the house tv and WiFi service in house. Polite and friendly. Thank you","trustpilot","2026-04-14",5,0);
+a("Fast response and fixed the problem","trustpilot","2026-04-14",5,0);
+a("Technician was on time, early actually, knew what he was doing, answered questions regardless of how stupid they might have been, very polite.","trustpilot","2026-04-14",5,0);
+a("Installation was great. Tech stayed around and made sure everything was working.","trustpilot","2026-04-14",5,0);
+a("The process was easy and the Tech was wonderful. I'm looking forward to finally having fast and reliable internet service.","trustpilot","2026-04-14",5,0);
+a("After my reporting outage, technician was here to install a temporary line in less than 24 hours. Still need permanent line installed underground.","trustpilot","2026-04-14",4,0);
+a("The guy was awesome quick and everything looks nice and neat","trustpilot","2026-04-14",5,0);
+a("Alfonso was very thorough, helpful in explaining things to me, and polite.","trustpilot","2026-04-14",5,0);
+a("Technician called to verify appt, came a little earlier, explained everything in detail, did the work and was very polite. Even though my cat kept wanting to supervise. Installation 10 out of 10.","trustpilot","2026-04-14",5,0);
+a("The tech was very nice helpful and listened to all my concerns and needs","trustpilot","2026-04-14",5,0);
+a("Great install quick and helped pick a good spot to install everything.","trustpilot","2026-04-14",5,0);
+a("My installation guy was Paul and he was great. There was horrible road construction going on in front of my house and he had to wait 20 minutes in traffic to get to me. He called to let me know what was going on but still was able to complete the install within the allocated timeframe. Highly recommend.","trustpilot","2026-04-14",5,0);
+a("Tech was on time and knew exactly what was wrong and fixed it right away. This could have been avoided if my line was buried instead of running across the road where it got damaged and will happen again until it is underground.","trustpilot","2026-04-14",4,0);
+a("Thank you for fixing the fiber optic wire that our landlords lawn guy accidentally cut.","trustpilot","2026-04-14",5,0);
+a("The scheduling for a technician was easy and someone came out the very next morning. The technician was friendly, knowledgeable and helpful. He did a great job and also corrected things that were not done when originally installed.","trustpilot","2026-04-14",5,0);
+a("Great service! At first when I had my service hooked up there were a lot of glitches but they got them all worked out and I haven't had any problems in 6 months with service and when I do have problems service tech is here immediately to fix it. I highly recommend brightspeed for all your internet needs.","trustpilot","2025-07-08",5,0);
+a("The technician was excellent, very punctual, professional, and extremely helpful. I really appreciated the great service.","trustpilot","2026-04-13",5,0);
+a("The assistant on the phone was thorough. He was patient and I followed all he asked me to do. There was no outage detected on his end. I reported my modem indicators statuses. He scheduled a technician to come out.","trustpilot","2026-04-10",4,0);
+a("The technician that installed my equipment originally is the same one that came out today. He was very friendly, knowledgeable, and helpful. And as a bonus he was early both times he came out.","trustpilot","2026-04-10",5,0);
+a("The technicians are great once they get here, BUT getting them here is a Nightmare. Appointments were made, company canceled, another appointment, no show. I told company the line was illegal because it was laying on the ground.","trustpilot","2026-04-08",2,0);
+a("From customer service to install technician. Everyone was personable went above and beyond to ensure my service was installed timely. There were a few hiccups along the way but it was worth it in the end.","trustpilot","2026-04-06",5,0);
+a("My phone call into the service line was handled quickly and there were two gentlemen at the house within the hour. Tyler was the man who followed up with me after fixing the issue in less than 30 minutes.","trustpilot","2026-04-05",5,0);
+a("Brightspeed has always been very responsive and quick to troubleshoot both online and in-home. My recent ticket was an in-home service call. Ruby is a phenomenal tech and is solid. She diagnosed the issue quickly.","trustpilot","2026-04-04",5,0);
+a("The sales rep was not salesly and pushy. Then the tech who installed inside the house was amazing. He conversed with us and was personable, friendly and professional. The whole process was smooth.","trustpilot","2026-04-03",5,0);
+a("Service seems okay but the technician made a mess of things leaving me to reorganize the devices, make sure everything that was plugged in before was still plugged in. It was not. Had to clean up after him.","trustpilot","2026-04-02",3,0);
+a("The 3 gentlemen that showed up to install the fiber internet were fabulous. They were very respectful, loved my dogs, and even though I said I had it, they stayed to make sure it worked.","trustpilot","2026-04-01",5,0);
+a("I tried to report an outage yesterday. Heavy equipment was clearing the lot behind my house and lines were down in that area. A robo assistant took me through the modem check routine which I already did. Very frustrating.","trustpilot","2026-03-30",2,0);
+a("I was very pleased with the upgrade service they provided and also with the technician. He explained everything to me or answered any questions I asked to the best of his ability.","trustpilot","2026-03-28",5,0);
+a("The service is absolutely horrible. I've had fiber Internet with another company for a couple years and absolutely loved it so when Brightspeed came to my door saying they could give me the same service for cheaper I switched. Worst decision ever. The internet goes out constantly and customer service is impossible to reach.","trustpilot","2026-03-25",1,0);
+a("Service tech Jonah was punctual and polite and made sure everything was working before he left. Internet speed is awesome.","trustpilot","2026-03-22",5,0);
+a("I have no issue with the bright speed service itself. I have been a customer with CenturyLink then bright speed since 1990. I wanted to drop the landline service yet keep the Internet service. It was a nightmare trying to get this done. Multiple calls, different answers each time.","trustpilot","2026-03-27",2,0);
+a("The setup people were very nice and had the system setup quickly. So far everything is working well. Connecting to all my online devices have been very easy.","trustpilot","2026-03-20",5,0);
+a("The Technician was great. He was professional and explained everything. The installation went smoothly and he had my phone and internet working in no time. Most pleasant experience.","trustpilot","2026-03-18",5,0);
+a("Called ahead of time, was quick and efficient and explained the issue and assisted with making sure I was able to reconnect. Super helpful.","trustpilot","2026-03-15",5,0);
+a("The technician was respectful, polite and patient. He solved our problem and had us up and working again in no time.","trustpilot","2026-03-12",5,0);
+
+// ── PissedConsumer reviews (real, from brightspeed.pissedconsumer.com) ──
+a("Worst internet ever more like dial up than high speed plus it blocks half of the places you try to visit. They need to be shut down and closed for business.","pissedconsumer","2025-10-15",1,0);
+a("I am putting my dad's affairs in order now that he is in the mid stages of Alzheimer's and have been cancelling and modifying all things that auto debit from his accounts. Everyone so far has been awesome except for Brightspeed. They kept me on hold for 20 minutes for no reason other than to hope that I drop the call. Then when the guy comes back on the line it's as if he completely ignored my request. Instead of keeping phone service and getting rid of the 1Mbps DSL service he happily tells me my new price will be higher with a new speed. I reiterate my original request, he puts me back on hold for another 15 minutes. Total crap. I wasted an hour with a simple request.","pissedconsumer","2025-08-21",1,0);
+a("Our internet is constantly going out with no resolution. They did a system update in February or March of 2025. After the update I could no longer make a payment with a debit card. I am receiving bills in the mail for one balance and when I go online it is a completely different balance. Multiple payments are coming out of my account however Brightspeed is not crediting the payments to my account. I have a zero balance and my service was disconnected. This is by far the worst company to have service with. You get the runaround when you call.","pissedconsumer","2025-06-24",1,0);
+a("Customer service sucks at Brightspeed. We have been having a problem not being able to receive any cell phone calls from anyone since June 2025. A customer service agent and a technician talked to each other with me listening. She said she could not fix the problem. A new appointment was scheduled for a repairman but that was canceled and rescheduled. Probably another broken promise again.","pissedconsumer","2025-09-19",1,0);
+a("I hate this company with a passion. They went up on their prices consistently with no explanation. I canceled my service and they are still charging me for it. I mailed back my modem and kept the tracking info and they are still charging me for it. I call several times a week to be put on the phone with someone I can't even understand. Do not go with this company.","pissedconsumer","2025-08-15",1,0);
+a("My wife and I had signed up for fiber internet and we were told our old service would remain on until the new service was installed. As soon as they got us to sign up they lied and cut our old service off so we would be without internet for a month. We were on the phone for over 4 hours being switched back and forth from one representative to another. Please do not mess with this company they are one of the most inconsiderate companies I have ever dealt with.","pissedconsumer","2025-07-26",1,0);
+a("I have problems all the time with the landline phone and it's a week or two before it's resolved. Same if I have Internet troubles.","pissedconsumer","2025-09-28",1,0);
+a("Initial order May 30 for installation of Brightspeed fiber. Customer service keeps setting up installation dates repeatedly but no line to home. August now and they state at customer service that the work is complete. Different units have Brightspeed but not this 8-plex. Canceled order today due to frustration.","pissedconsumer","2025-08-20",1,0);
+a("Cut off my internet since I hadn't yet converted to the fiber. Gave no notice just killed it even though I had a pretty large credit on my account. Coerced me into giving them a credit card number and said if I wanted internet I had to switch right now to fiber. They sent the outside techs but not inside techs. Then they sent me a message they would send install techs over A WEEK LATER. I switched right away and got another provider within a day.","pissedconsumer","2025-08-04",1,0);
+a("When Brightspeed took over CenturyLink customers in our area it was total crap. Only people you can talk to are in a Philippines call center and they are not interested in resolving your internet or phone service problems they just want you to buy more services. Our internet service was out for 6 weeks and I spent countless hours on the phone trying to get repair. I canceled our service owing nothing and they keep billing me.","pissedconsumer","2025-07-09",1,0);
+a("About a year ago the company ran cable into our neighborhood. There were sections of cable left on the ground and not buried. This is running across yards and streets causing a nuisance. Repeated attempts to get this fixed have failed.","pissedconsumer","2025-08-18",1,0);
+a("This company is the worst ever. I've had internet issues since July 10th and they claim my issues aren't real. I haven't been able to work and can't use my phone.","pissedconsumer","2025-08-18",1,0);
+a("The storm Helene knocked a neighbor's tree down which ripped the line from the pole and my house. I spoke to 4 separate agents explaining 3 times to each one what the issue was to schedule a repair. It was automatically cancelled ten minutes after the call so I had to go through it all over again. I was promised a credit to my account because of the hassle. When I did not see that reflected I reached back out and was assured it was showing in their system. It has been 3 weeks there is no credit. When the fiber service works it's amazing but not at all worth the frustration of attempting to reach customer service.","pissedconsumer","2024-10-28",1,0);
+a("This company is the worst I have dealt with. They lie and promise to show up on time and don't. Really don't have any service people that know what they are doing. When you call them for a problem you can't understand the person you're talking to. They kept my wife on the phone for 2 hours asking the same questions over and over again.","pissedconsumer","2025-07-08",1,0);
+a("I have been a customer 20 years with CenturyLink Brightspeed. DSL line jumped from 55 a month to 99 dollars. When called to discuss over 20 agents couldn't find my copper DSL account. Said I am not on file but yet they take automated withdrawals every month. Been paying for a phone line that does not exist since 2018. My speed is 1 instead of what I'm paying for. Can't watch Netflix sending a photo takes 20 minutes.","pissedconsumer","2025-05-06",1,0);
+
 return R;
 })();
 
@@ -899,28 +911,36 @@ function renderOverview(){
   const negPct=revs.length?100-posPct-neuPct:0;
 
   document.getElementById('scorecard-row').innerHTML=`
-    <div class="card sc anim">
-      <div class="sc-big">${score}</div>
-      <div class="sc-lbl">Overall Sentiment Score (0–100)</div>
-      <div class="expl">Computed from AFINN-165 lexicon analysis of review text. 0=negative, 50=neutral, 100=positive.</div>
-      <div class="sc-meta" style="margin-top:12px">
-        <div class="mi"><span class="mi-v">${revs.length.toLocaleString()}</span><span class="mi-l">Total Reviews</span></div>
-        <div class="mi"><span class="mi-v ${score>=50?'trend-u':'trend-d'}">${score>=50?'▲':'▼'} ${score>=50?'+':''}${((score-50)/50*10).toFixed(1)}%</span><span class="mi-l">vs Neutral</span></div>
+    <div class="card sc anim" style="display:flex;flex-direction:column">
+      <div style="font-size:14px;font-weight:600;color:var(--t1)">Overall sentiment score</div>
+      <div class="expl" style="margin:6px 0 0">AFINN-165 lexicon analysis. 0 = negative, 50 = neutral, 100 = positive.</div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 0">
+        <div style="font-size:96px;font-weight:800;line-height:1;color:var(--brand);letter-spacing:-3px">${score}</div>
+        <div style="font-size:13px;color:var(--t3);margin-top:8px">out of 100</div>
+        <div class="sc-meta" style="margin-top:16px">
+          <div class="mi"><span class="mi-v">${revs.length.toLocaleString()}</span><span class="mi-l">Total Reviews</span></div>
+          <div class="mi"><span class="mi-v ${score>=50?'trend-u':'trend-d'}">${score>=50?'▲':'▼'} ${score>=50?'+':''}${((score-50)/50*10).toFixed(1)}%</span><span class="mi-l">vs Neutral</span></div>
+        </div>
       </div>
     </div>
-    <div class="card anim" style="animation-delay:.1s;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center">
-      <div style="font-size:14px;font-weight:600;margin-bottom:10px;color:var(--t1)">Sentiment Distribution</div>
-      <div class="ch-area" id="ch-donut" style="height:140px;width:160px"></div>
-      <div class="sent-dist">
-        <div class="sent-stat"><div class="sent-pct" style="color:var(--pos)">${posPct}%</div><div class="sent-name">Positive</div></div>
-        <div class="sent-stat"><div class="sent-pct" style="color:var(--neu)">${neuPct}%</div><div class="sent-name">Neutral</div></div>
-        <div class="sent-stat"><div class="sent-pct" style="color:var(--neg)">${negPct}%</div><div class="sent-name">Negative</div></div>
+    <div class="card anim" style="animation-delay:.1s;display:flex;flex-direction:column">
+      <div style="font-size:14px;font-weight:600;color:var(--t1)">Sentiment distribution</div>
+      <div class="expl" style="margin:6px 0 0">Breakdown of positive, neutral, and negative reviews.</div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 0">
+        <div class="ch-area" id="ch-donut" style="height:170px;width:190px"></div>
+        <div class="sent-dist">
+          <div class="sent-stat"><div class="sent-pct" style="color:var(--pos)">${posPct}%</div><div class="sent-name">Positive</div></div>
+          <div class="sent-stat"><div class="sent-pct" style="color:var(--neu)">${neuPct}%</div><div class="sent-name">Neutral</div></div>
+          <div class="sent-stat"><div class="sent-pct" style="color:var(--neg)">${negPct}%</div><div class="sent-name">Negative</div></div>
+        </div>
       </div>
     </div>
-    <div class="card anim" style="animation-delay:.2s">
-      <div style="font-size:14px;font-weight:600;margin-bottom:14px;color:var(--t1)">Volume by Source</div>
-      <div id="source-bars"></div>
-      <div class="expl" style="margin-top:10px">Number of reviews collected from each source.</div>
+    <div class="card anim" style="animation-delay:.2s;display:flex;flex-direction:column">
+      <div style="font-size:14px;font-weight:600;color:var(--t1)">Volume by source</div>
+      <div class="expl" style="margin:6px 0 0">Number of reviews collected from each source.</div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:10px 0">
+        <div id="source-bars"></div>
+      </div>
     </div>`;
 
   renderDonut('ch-donut',posPct,neuPct,negPct);
@@ -942,7 +962,7 @@ function renderOverview(){
     const cs=catScore(revs,k);
     const count=revs.filter(r=>r.categories.includes(k)).length;
     catHTML+=`<div class="cat-card">
-      <div class="cat-title"><span>${c.icon}</span>${c.name} <span style="font-size:10px;color:var(--t3);font-weight:400">(${count})</span></div>
+      <div class="cat-title">${c.name} <span style="font-size:10px;color:var(--t3);font-weight:400">(${count})</span></div>
       <div style="display:flex;align-items:center;gap:6px">
         <div class="cb-track"><div class="cb-fill" style="width:${cs}%;background:${scoreColor(cs)}">${cs}</div></div>
       </div></div>`;
@@ -950,8 +970,8 @@ function renderOverview(){
   document.getElementById('cat-grid').innerHTML=catHTML;
 
   document.getElementById('overview-charts').innerHTML=`
-    <div class="card"><div class="ch-title">Sentiment Trend</div><div class="ch-sub">Monthly average sentiment over time</div><div class="ch-area" id="ch-trend"></div></div>
-    <div class="card"><div class="ch-title">Monthly Review Volume</div><div class="ch-sub">Number of reviews collected per month</div><div class="ch-area" id="ch-volume"></div></div>`;
+    <div class="card"><div class="ch-title">Sentiment trend</div><div class="ch-sub">Monthly average sentiment over time</div><div class="ch-area" id="ch-trend"></div></div>
+    <div class="card"><div class="ch-title">Monthly review volume</div><div class="ch-sub">Number of reviews collected per month</div><div class="ch-area" id="ch-volume"></div></div>`;
   renderTrendChart('ch-trend',revs);
   renderVolumeChart('ch-volume',revs);
 
@@ -997,19 +1017,20 @@ function renderSourceBars(id,revs){
     {key:'reddit',label:'Reddit',color:'#FF5C35'},
     {key:'fcc',label:'FCC',color:'#3B82F6'},
     {key:'bbb',label:'BBB',color:'#0E7490'},
-    {key:'trustpilot',label:'Trustpilot',color:'#059669'}
+    {key:'trustpilot',label:'Trustpilot',color:'#059669'},
+    {key:'pissedconsumer',label:'PissedConsumer',color:'#DC2626'}
   ];
   const max=Math.max(...sources.map(s=>revs.filter(r=>r.source===s.key).length),1);
   let html='';
   sources.forEach(s=>{
     const count=revs.filter(r=>r.source===s.key).length;
     const w=Math.max(4,count/max*100);
-    html+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-      <span style="font-size:12px;font-weight:500;width:80px;text-align:right;color:var(--t2)">${s.label}</span>
-      <div style="flex:1;height:20px;background:var(--bdr-subtle);border-radius:10px;overflow:hidden">
+    html+=`<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+      <span style="font-size:13px;font-weight:600;min-width:115px;width:115px;text-align:right;color:var(--t2)">${s.label}</span>
+      <div style="flex:1;height:26px;background:var(--bdr-subtle);border-radius:10px;overflow:hidden">
         <div style="width:${w}%;height:100%;background:${s.color};border-radius:10px;opacity:.85;transition:width .6s ease"></div>
       </div>
-      <span style="font-size:12px;font-weight:700;min-width:30px;color:var(--t1)">${count}</span>
+      <span style="font-size:14px;font-weight:700;min-width:36px;color:var(--t1)">${count}</span>
     </div>`;
   });
   el.innerHTML=html;
@@ -1049,7 +1070,7 @@ function renderTrendChart(id,revs){
   const refLine=`<line x1="${PL}" y1="${toY(50)}" x2="${W-PR}" y2="${toY(50)}" stroke="#8E95A9" stroke-width=".75" stroke-dasharray="6,4"/>`;
 
   el.innerHTML=`<svg width="100%" height="100%" viewBox="0 0 ${W} ${H}">${gridLines}${xLabels}${refLine}${fillPath}${linePath}${dots}
-    <text x="${W-PR}" y="${toY(50)-5}" class="axis-l" text-anchor="end" fill="#8E95A9" font-size="9" font-weight="500">neutral</text></svg>`;
+    </svg>`;
 }
 
 /* ═══════════════════════════════════════════════
@@ -1057,7 +1078,7 @@ function renderTrendChart(id,revs){
    ═══════════════════════════════════════════════ */
 function renderVolumeChart(id,revs){
   const el=document.getElementById(id);if(!el)return;
-  const W=440,H=200,PL=40,PR=10,PT=10,PB=30;
+  const W=440,H=220,PL=40,PR=10,PT=24,PB=30;
   const months=[];const now=new Date();
   for(let i=11;i>=0;i--){const d=new Date(now);d.setMonth(d.getMonth()-i);months.push({m:d.getMonth(),y:d.getFullYear(),label:d.toLocaleString('en',{month:'short'})});}
   const counts=months.map(mo=>revs.filter(r=>new Date(r.date).getMonth()===mo.m&&new Date(r.date).getFullYear()===mo.y).length);
@@ -1072,7 +1093,7 @@ function renderVolumeChart(id,revs){
     const h=counts[i]/maxC*cH;
     const y=PT+cH-h;
     bars+=`<rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="4" fill="#FF5C35" opacity=".8"/>`;
-    if(counts[i]>0)bars+=`<text x="${x+barW/2}" y="${y-5}" class="axis-l" text-anchor="middle" font-weight="700" fill="#FF5C35" font-size="10">${counts[i]}</text>`;
+    if(counts[i]>0)bars+=`<text x="${x+barW/2}" y="${y-8}" class="axis-l" text-anchor="middle" font-weight="700" fill="#FF5C35" font-size="10">${counts[i]}</text>`;
   });
   let xLabels='';months.forEach((mo,i)=>{
     if(i%2===0){
@@ -1102,14 +1123,14 @@ function renderReviewSample(revs){
     const lbl=sentLabel(r.sentimentScore);
     const cls=sentClass(lbl);
     const srcCls='src-'+(r.source||'reddit');
-    const srcName=r.source==='fcc'?'FCC':r.source==='bbb'?'BBB':r.source==='trustpilot'?'Trustpilot':'Reddit';
+    const srcName=r.source==='fcc'?'FCC':r.source==='bbb'?'BBB':r.source==='trustpilot'?'Trustpilot':r.source==='pissedconsumer'?'PissedConsumer':'Reddit';
     html+=`<div class="rv-sample">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;flex-wrap:wrap;gap:4px">
         <div style="display:flex;gap:6px;align-items:center"><span class="src-b ${srcCls}">${srcName}</span><span class="rv-sent ${cls}">${lbl} (${r.sentimentScore})</span></div>
         <span style="font-size:10px;color:var(--t3)">${r.date}</span>
       </div>
       <div class="rv-txt">${r.text.slice(0,200)}${r.text.length>200?'…':''}</div>
-      <div class="rv-meta"><span>Categories: ${r.categories.map(c=>CATS[c]?.icon+' '+CATS[c]?.name).join(', ')}</span></div>
+      <div class="rv-meta"><span>Categories: ${r.categories.map(c=>CATS[c]?.name).join(', ')}</span></div>
     </div>`;
   });
   el.innerHTML=html;
@@ -1126,7 +1147,7 @@ function renderWorstReviews(){
   let html = '';
   worst.forEach(r => {
     const srcCls = 'src-' + (r.source || 'reddit');
-    const srcName = r.source === 'fcc' ? 'FCC' : r.source === 'bbb' ? 'BBB' : r.source === 'trustpilot' ? 'Trustpilot' : 'Reddit';
+    const srcName = r.source === 'fcc' ? 'FCC' : r.source === 'bbb' ? 'BBB' : r.source === 'trustpilot' ? 'Trustpilot' : r.source === 'pissedconsumer' ? 'PissedConsumer' : 'Reddit';
     html += `<div class="worst-rv">
       <div style="display:flex;align-items:flex-start;gap:12px">
         <div class="worst-score">${r.sentimentScore}</div>
@@ -1134,7 +1155,7 @@ function renderWorstReviews(){
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap">
             <span class="src-b ${srcCls}">${srcName}</span>
             <span style="font-size:10px;color:var(--t3)">${r.date}</span>
-            ${r.categories.map(c => `<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:var(--bg);color:var(--t2);font-weight:500">${CATS[c]?.icon||''} ${CATS[c]?.name||c}</span>`).join('')}
+            ${r.categories.map(c => `<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:var(--bg);color:var(--t2);font-weight:500">${CATS[c]?.name||c}</span>`).join('')}
           </div>
           <div class="rv-txt">${r.text}</div>
         </div>
@@ -1258,15 +1279,10 @@ function loadLiveCache(key, maxAgeMs){
 }
 
 function updateDataMode(){
-  const embedded = ST.reviews.filter(r => !r._live).length;
-  const live = ST.reviews.filter(r => r._live).length;
   const total = ST.reviews.length;
+  const live = ST.reviews.filter(r => r._live).length;
 
-  const dmEmbed = document.getElementById('dmEmbed');
-  const dmLive = document.getElementById('dmLive');
   const dmTotal = document.getElementById('dmTotal');
-  if(dmEmbed) dmEmbed.textContent = embedded.toLocaleString();
-  if(dmLive) dmLive.textContent = live.toLocaleString();
   if(dmTotal) dmTotal.textContent = total.toLocaleString();
 
   const modeLabel = document.getElementById('dmModeLabel');
@@ -1275,18 +1291,18 @@ function updateDataMode(){
 
   if(live > 0){
     if(modeLabel){
-      modeLabel.textContent = `Embedded + Live (${total.toLocaleString()} reviews)`;
+      modeLabel.textContent = `${total.toLocaleString()} reviews`;
       modeLabel.className = 'dm-mode dm-mode-live';
     }
-    if(desc) desc.textContent = `Dashboard is running with ${embedded.toLocaleString()} embedded + ${live.toLocaleString()} live reviews from Reddit and FCC. All scores, charts, and filters reflect the expanded dataset. Pull again for even more.`;
-    if(ageText) ageText.textContent = `${embedded} embedded + ${live} live`;
+    if(desc) desc.textContent = `Dashboard is analyzing ${total.toLocaleString()} reviews from Reddit, FCC, Trustpilot, PissedConsumer, and BBB. Pull again to fetch the latest.`;
+    if(ageText) ageText.textContent = `${total.toLocaleString()} reviews`;
   } else {
     if(modeLabel){
-      modeLabel.textContent = 'Embedded Baseline';
+      modeLabel.textContent = `${total.toLocaleString()} reviews`;
       modeLabel.className = 'dm-mode dm-mode-embed';
     }
-    if(desc) desc.textContent = 'Dashboard is running with embedded baseline reviews. Click "Pull Live Reviews" to fetch real-time data from Reddit and FCC for richer, up-to-date analysis.';
-    if(ageText) ageText.textContent = 'Embedded baseline';
+    if(desc) desc.textContent = `Dashboard is analyzing ${total.toLocaleString()} reviews. Click "Pull live reviews" to fetch the latest from Reddit and FCC.`;
+    if(ageText) ageText.textContent = `${total.toLocaleString()} reviews`;
   }
 }
 
@@ -1344,7 +1360,7 @@ async function pullLiveReviews(providerKey){
 function showProtocolNote(){
   if(location.protocol === 'file:'){
     const desc = document.getElementById('dmDesc');
-    if(desc) desc.textContent = 'Embedded baseline active. Reddit data requires a local server (run "npx serve" in this folder). FCC data works from any protocol. Click "Pull Live Reviews" to fetch what\'s available.';
+    if(desc) desc.textContent = 'Embedded baseline active. Reddit data requires a local server (run "npx serve" in this folder). FCC data works from any protocol. Click "Pull live reviews" to fetch what\'s available.';
   }
 }
 
@@ -1584,7 +1600,7 @@ function renderCategoryRanking(){
   html += '</tr></thead><tbody>';
 
   catKeys.forEach(ck => {
-    html += `<tr><td>${CATS[ck].icon} ${CATS[ck].name}</td>`;
+    html += `<tr><td>${CATS[ck].name}</td>`;
     providerKeys.forEach(pk => {
       const sc = allScores[pk][ck];
       const hl = pk === 'brightspeed' ? ' col-hl' : '';
@@ -1773,7 +1789,7 @@ function renderGeoMap(){
     const d = geo.byState[st];
     if(d){
       zVals.push(d.avg);
-      textLabels.push(`<b>${STATE_NAMES[st]}</b><br>Sentiment: ${d.avg}<br>Reviews: ${d.count}<br>Top Issue: ${CATS[d.topCategory]?.name||d.topCategory}`);
+      textLabels.push(`<b>${STATE_NAMES[st]}</b><br>Sentiment: ${d.avg}<br>Reviews: ${d.count}<br>Top issue: ${CATS[d.topCategory]?.name||d.topCategory}`);
     } else {
       zVals.push(null);
       textLabels.push(`<b>${STATE_NAMES[st]}</b><br>Brightspeed footprint · No reviews`);
@@ -1929,11 +1945,11 @@ function renderGeoDetail(stateCode, byStateData){
         <div class="geo-detail-stat-lbl">Negative</div>
       </div>
     </div>
-    <div class="stitle" style="font-size:12px;margin-bottom:8px">Category Breakdown</div>
+    <div class="stitle" style="font-size:12px;margin-bottom:8px">Category breakdown</div>
     <div class="geo-detail-cats">
       ${sortedCats.map(([ck, d]) => `
         <div class="geo-detail-cat">
-          <span class="geo-detail-cat-name">${CATS[ck]?.icon||''} ${CATS[ck]?.name||ck}</span>
+          <span class="geo-detail-cat-name">${CATS[ck]?.name||ck}</span>
           <span class="geo-detail-cat-score" style="color:${scoreColor(d.avg)}">${d.avg} <span style="font-weight:400;font-size:10px;color:var(--t3)">(${d.count})</span></span>
         </div>
       `).join('')}
@@ -1945,177 +1961,6 @@ function renderGeo(){
   renderGeoMap();
 }
 
-/* ═══════════════════════════════════════════════
-   PRICING IMPACT
-   ═══════════════════════════════════════════════ */
-const PRICING_SUB_ISSUES = {
-  'Price Increases':   ['increase','hike','raised','went up','jumped','higher','more expensive','doubled'],
-  'Hidden Fees':       ['hidden','fee','fees','surcharge','extra charge','unexpected charge','fine print','sneaky'],
-  'Poor Value':        ['not worth','overpriced','expensive','ripoff','rip-off','rip off','waste of money','too much'],
-  'Billing Errors':    ['overcharge','overcharged','wrong bill','incorrect','double charge','billing error','charged twice'],
-  'Contract Issues':   ['contract','early termination','lock','locked in','commitment','penalty','etf'],
-  'Promo Bait':        ['promo','promotional','introductory','bait','teaser','expired','went up after']
-};
-
-function getPricingKeywords(){
-  return ['price','expensive','bill','fee','increase','discount','cost','overpriced',
-          'overcharge','cheap','affordable','rate','hike','hidden','surcharge',
-          'contract','promo','promotional','value','worth','dollar','money','payment'];
-}
-
-function renderPricingImpact(){
-  const revs = filteredReviews();
-  const negRevs = revs.filter(r => r.sentimentScore < 40);
-  const pricingKw = getPricingKeywords();
-
-  const negPricing = negRevs.filter(r => {
-    const t = r.text.toLowerCase();
-    return pricingKw.some(k => t.includes(k));
-  });
-
-  const pricingPct = negRevs.length ? Math.round(negPricing.length / negRevs.length * 100) : 0;
-
-  const catCounts = {};
-  for(const ck in CATS){
-    catCounts[ck] = negRevs.filter(r => r.categories.includes(ck)).length;
-  }
-  const catRanked = Object.entries(catCounts).sort((a,b) => b[1] - a[1]);
-  const pricingRank = catRanked.findIndex(([k]) => k === 'pricing') + 1;
-
-  const avgSentPricing = negPricing.length
-    ? Math.round(negPricing.reduce((s,r) => s + r.sentimentScore, 0) / negPricing.length)
-    : 0;
-
-  /* KPIs */
-  const kpiEl = document.getElementById('priKpis');
-  if(kpiEl){
-    kpiEl.innerHTML = `
-      <div class="pri-kpi">
-        <div class="pri-kpi-val" style="color:${pricingPct > 30 ? '#DC2626' : pricingPct > 15 ? '#D97706' : '#059669'}">${pricingPct}%</div>
-        <div class="pri-kpi-lbl">of negative reviews mention pricing</div>
-        <div class="pri-kpi-sub">${negPricing.length} of ${negRevs.length} negative reviews</div>
-      </div>
-      <div class="pri-kpi">
-        <div class="pri-kpi-val" style="color:${pricingRank <= 2 ? '#DC2626' : '#D97706'}">#${pricingRank}</div>
-        <div class="pri-kpi-lbl">complaint driver ranking</div>
-        <div class="pri-kpi-sub">out of ${catRanked.length} categories</div>
-      </div>
-      <div class="pri-kpi">
-        <div class="pri-kpi-val" style="color:${scoreColor(avgSentPricing)}">${avgSentPricing}</div>
-        <div class="pri-kpi-lbl">avg sentiment (pricing complaints)</div>
-        <div class="pri-kpi-sub">on a 0–100 scale</div>
-      </div>
-      <div class="pri-kpi">
-        <div class="pri-kpi-val" style="color:var(--t1)">${negPricing.length}</div>
-        <div class="pri-kpi-lbl">pricing-related negative reviews</div>
-        <div class="pri-kpi-sub">total negative: ${negRevs.length}</div>
-      </div>`;
-  }
-
-  /* Insight banner */
-  const insightEl = document.getElementById('priInsight');
-  if(insightEl){
-    const topDriver = catRanked[0];
-    if(pricingRank === 1){
-      insightEl.innerHTML = `<strong>⚠️ Pricing is the #1 driver of negative sentiment.</strong> ${pricingPct}% of all negative reviews mention pricing-related issues. Addressing pricing concerns should be a top priority.`;
-    } else {
-      insightEl.innerHTML = `<strong>💰 Pricing ranks #${pricingRank} among complaint drivers</strong> (behind ${CATS[topDriver[0]]?.name || topDriver[0]}). ${pricingPct}% of negative reviews mention pricing — ${pricingPct > 20 ? 'a significant concern worth monitoring.' : 'present but not the dominant issue.'}`;
-    }
-  }
-
-  /* Sub-issue bar chart */
-  const barEl = document.getElementById('priBarChart');
-  if(barEl){
-    const subCounts = {};
-    for(const [label, kws] of Object.entries(PRICING_SUB_ISSUES)){
-      subCounts[label] = negPricing.filter(r => {
-        const t = r.text.toLowerCase();
-        return kws.some(k => t.includes(k));
-      }).length;
-    }
-    const sorted = Object.entries(subCounts).filter(([,c]) => c > 0).sort((a,b) => b[1] - a[1]);
-    const maxCount = sorted.length ? sorted[0][1] : 1;
-    const colors = ['#DC2626','#E24A20','#D97706','#EAB308','#65A30D','#059669'];
-
-    barEl.innerHTML = sorted.length ? sorted.map(([label, count], i) => {
-      const pct = Math.round(count / maxCount * 100);
-      return `<div class="pri-bar-row">
-        <div class="pri-bar-lbl">${label}</div>
-        <div class="pri-bar-track"><div class="pri-bar-fill" style="width:${pct}%;background:${colors[i] || '#9CA3AF'}"></div></div>
-        <div class="pri-bar-val" style="color:${colors[i] || '#9CA3AF'}">${count}</div>
-      </div>`;
-    }).join('') : '<div style="font-size:12px;color:var(--t3);text-align:center;padding:20px">No pricing sub-issues detected in current data.</div>';
-  }
-
-  /* Trend line chart */
-  const trendEl = document.getElementById('priTrendChart');
-  if(trendEl){
-    const byMonth = {};
-    revs.forEach(r => {
-      const d = new Date(r.date);
-      const key = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
-      if(!byMonth[key]) byMonth[key] = { total: 0, negTotal: 0, negPricing: 0 };
-      byMonth[key].total++;
-      if(r.sentimentScore < 40){
-        byMonth[key].negTotal++;
-        const t = r.text.toLowerCase();
-        if(pricingKw.some(k => t.includes(k))) byMonth[key].negPricing++;
-      }
-    });
-
-    const months = Object.keys(byMonth).sort();
-    if(months.length >= 2){
-      const points = months.map(m => {
-        const d = byMonth[m];
-        return { month: m, pct: d.negTotal ? Math.round(d.negPricing / d.negTotal * 100) : 0 };
-      });
-
-      const W = 400, H = 180, PL = 40, PR = 16, PT = 16, PB = 32;
-      const cW = W - PL - PR, cH = H - PT - PB;
-      const maxY = Math.max(100, ...points.map(p => p.pct));
-      const stepX = cW / Math.max(1, points.length - 1);
-
-      let svg = `<svg width="100%" viewBox="0 0 ${W} ${H}" style="overflow:visible">`;
-
-      [0, 25, 50, 75, 100].forEach(v => {
-        if(v > maxY) return;
-        const y = PT + cH - (v / maxY) * cH;
-        svg += `<line x1="${PL}" y1="${y}" x2="${W-PR}" y2="${y}" stroke="var(--bdr-subtle)" stroke-width="1"/>`;
-        svg += `<text x="${PL-6}" y="${y+3}" font-size="9" fill="var(--t3)" font-family="DM Sans" text-anchor="end">${v}%</text>`;
-      });
-
-      let pathD = '';
-      let areaD = `M${PL},${PT + cH}`;
-      const dots = [];
-
-      points.forEach((p, i) => {
-        const x = PL + i * stepX;
-        const y = PT + cH - (p.pct / maxY) * cH;
-        pathD += (i === 0 ? 'M' : 'L') + `${x},${y}`;
-        areaD += `L${x},${y}`;
-        dots.push({ x, y, pct: p.pct, month: p.month });
-      });
-      areaD += `L${PL + (points.length-1)*stepX},${PT+cH}Z`;
-
-      svg += `<path d="${areaD}" fill="url(#priGrad)" opacity=".15"/>`;
-      svg += `<defs><linearGradient id="priGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#DC2626"/><stop offset="100%" stop-color="#DC2626" stop-opacity="0"/></linearGradient></defs>`;
-      svg += `<path d="${pathD}" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
-
-      dots.forEach(d => {
-        const label = d.month.split('-')[1] + '/' + d.month.split('-')[0].slice(2);
-        svg += `<circle cx="${d.x}" cy="${d.y}" r="4" fill="#DC2626" stroke="#fff" stroke-width="2"/>`;
-        svg += `<text x="${d.x}" y="${d.y - 10}" font-size="9" fill="#DC2626" font-family="DM Sans" font-weight="700" text-anchor="middle">${d.pct}%</text>`;
-        svg += `<text x="${d.x}" y="${PT + cH + 16}" font-size="8" fill="var(--t3)" font-family="DM Sans" text-anchor="middle">${label}</text>`;
-      });
-
-      svg += '</svg>';
-      trendEl.innerHTML = svg;
-    } else {
-      trendEl.innerHTML = '<div style="font-size:12px;color:var(--t3);text-align:center;padding:20px">Not enough time range data for trend analysis.</div>';
-    }
-  }
-
-}
 
 /* ═══════════════════════════════════════════════
    NAVIGATION, EVENTS & INIT
@@ -2128,11 +1973,10 @@ function switchSection(sec){
   document.getElementById('sec-' + sec).classList.add('active');
   document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
   document.querySelector(`.nav button[data-sec="${sec}"]`).classList.add('active');
-  document.querySelector('.fbar').style.display = (sec === 'competitors' || sec === 'geo' || sec === 'pricing') ? 'none' : '';
+  document.querySelector('.fbar').style.display = (sec === 'competitors' || sec === 'geo') ? 'none' : '';
   if(sec === 'painpoints') renderPainPoints();
   if(sec === 'competitors') renderCompetitors();
   if(sec === 'geo') renderGeo();
-  if(sec === 'pricing') renderPricingImpact();
 }
 
 document.querySelectorAll('.nav button').forEach(b => b.addEventListener('click', () => switchSection(b.dataset.sec)));
@@ -2143,7 +1987,6 @@ function renderAll(){
   if(currentSection === 'painpoints') renderPainPoints();
   if(currentSection === 'competitors') renderCompetitors();
   if(currentSection === 'geo') renderGeo();
-  if(currentSection === 'pricing') renderPricingImpact();
 }
 
 document.querySelectorAll('#tpills button').forEach(b=>b.addEventListener('click',function(){
